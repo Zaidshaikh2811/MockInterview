@@ -7,31 +7,70 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { chatSession } from '@/utils/GeminiAiModel'
+import { db } from '@/utils/db'
+import { MockInterview } from '@/utils/schema'
+import { v4 as uuidv4 } from 'uuid'
+import { useUser } from '@clerk/nextjs'
+import moment from 'moment'
 
 const AddNewInterview = () => {
+
+    const { user } = useUser()
+
     const [openDialog, setOpenDialog] = useState(false)
     const [jobRole, setJobRole] = useState("")
     const [jobDescription, setJobDescription] = useState("")
     const [experience, setExperience] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [jsonResp, setJsonResp] = useState([])
 
 
 
     const onSubmitForm = async (e) => {
+
         e.preventDefault()
-        const InputPrompt = `Job Position: ${jobRole}, Job Description: ${jobDescription}, Experience: ${experience} , 
-        depending on this information give me ${process.env.numberOfQuestions} interview 
-        question with answer in JSON format.give Question and Answered as field in JSON.`
+        try {
+            setLoading(true)
+            const InputPrompt = `Job Position: ${jobRole}, Job Description: ${jobDescription}, Experience: ${experience} , 
+            depending on this information give me ${process.env.numberOfQuestions} interview 
+            question with answer in JSON format.give Question and Answered as field in JSON.`
 
 
-        const result = await chatSession.sendMessage(InputPrompt)
-        const mockJsonResponse = (result.response.text()).replace('```json', '').replace('```', '')
-        console.log(JSON.parse(mockJsonResponse))
+            const result = await chatSession.sendMessage(InputPrompt)
+            const mockJsonResponse = (result.response.text()).replace('```json', '').replace('```', '')
+            setJsonResp(mockJsonResponse)
+
+            if (mockJsonResponse) {
+
+                const resp = await db.insert(MockInterview).values({
+                    mockId: uuidv4(),
+                    jsonMockResp: mockJsonResponse,
+                    jobPosition: jobRole,
+                    jobDesc: jobDescription,
+                    jobExperience: experience,
+                    createdAt: moment().format('DD-MM-YYYY'),
+                    createdBy: user?.primaryEmailAddress?.emailAddress
+
+                }).returning({ mockId: MockInterview.mockId })
+
+                console.log(resp)
+            } else {
+                console.log("No response")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+        finally {
+            setJobRole("")
+            setJobDescription("")
+            setExperience("")
+            setLoading(false)
+        }
     }
 
     return (
@@ -91,15 +130,16 @@ const AddNewInterview = () => {
                                     </div>
                                     <div className='flex justify-end gap-4 mt-10'>
                                         <Button
-                                            type="submit"
-                                            className="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all">
-                                            Start Interview
-                                        </Button>
-                                        <Button
                                             onClick={() => setOpenDialog(false)}
                                             variant='destructive'
                                             className="hover:text-red-600 border-red-600 hover:bg-red-50 py-2 px-4 rounded-lg transition-all">
                                             Cancel
+                                        </Button>
+                                        <Button
+                                            type="submit"
+                                            disabled={loading}
+                                            className="disabled:opacity-65 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all">
+                                            {loading ? "Loading..." : "Submit"}
                                         </Button>
                                     </div>
                                 </form>
