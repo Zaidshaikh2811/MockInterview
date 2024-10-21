@@ -7,19 +7,20 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-} from "@/components/ui/dialog"
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { chatSession } from '@/utils/GeminiAiModel'
+} from "../../../components/ui/dialog"
+import { Button } from '../../../components/ui/button'
+import { Input } from '../../../components/ui/input'
+import { Textarea } from '../../../components/ui/textarea'
+import { chatSession } from "../../../utils/GeminiAiModel"
 import { db } from '@/utils/db'
 import { MockInterview } from '@/utils/schema'
 import { v4 as uuidv4 } from 'uuid'
 import { useUser } from '@clerk/nextjs'
 import moment from 'moment'
+import { useRouter } from 'next/navigation'
 
 const AddNewInterview = () => {
-
+    const router = useRouter()
     const { user } = useUser()
 
     const [openDialog, setOpenDialog] = useState(false)
@@ -57,8 +58,12 @@ const AddNewInterview = () => {
                     createdBy: user?.primaryEmailAddress?.emailAddress
 
                 }).returning({ mockId: MockInterview.mockId })
+                if (resp) {
 
-                console.log(resp)
+                    setOpenDialog(false)
+                    router.push(`/dashboard/interview/${resp[0]?.mockId}`)
+                }
+
             } else {
                 console.log("No response")
             }
