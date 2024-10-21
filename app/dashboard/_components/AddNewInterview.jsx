@@ -39,11 +39,11 @@ const AddNewInterview = () => {
             setLoading(true)
             const InputPrompt = `Job Position: ${jobRole}, Job Description: ${jobDescription}, Experience: ${experience} , 
             depending on this information give me ${process.env.numberOfQuestions} interview 
-            question with answer in JSON format.give Question and Answered as field in JSON.`
+            question with answer in JSON format.give  Question and Answered as fields in JSON.`
 
 
             const result = await chatSession.sendMessage(InputPrompt)
-            const mockJsonResponse = (result.response.text()).replace('```json', '').replace('```', '')
+            const mockJsonResponse = (result.response.text()).replace('```json', '').replace('```', '').replace("**Remember:** These are just example questions and answers. Be prepared to discuss your own experiences, projects, and learning goals in detail. Adapt the answers to reflect your individual skills and personality.", "")
             setJsonResp(mockJsonResponse)
 
             if (mockJsonResponse) {

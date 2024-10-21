@@ -7,9 +7,11 @@ import { eq } from 'drizzle-orm';
 import { WebcamIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Webcam from 'react-webcam';
-import Head from 'next/head'; // Next.js Head component for metadata
+import Head from 'next/head';
+import { useRouter } from 'next/navigation';
 
 const Interview = ({ params }) => {
+    const router = useRouter()
     const [interviewDetails, setInterviewDetails] = useState([]);
     const [webCamEnabled, setWebCamEnabled] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -132,7 +134,7 @@ const Interview = ({ params }) => {
                                     </Button>
                                 </div>
                             )}
-                            <Button className="mt-6 w-full bg-primary text-white">
+                            <Button className="mt-6 w-full bg-primary text-white" onClick={() => router.push(`/dashboard/interview/${params.interviewId}/start`)}>
                                 Start Interview
                             </Button>
                         </div>
