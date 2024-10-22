@@ -27,6 +27,7 @@ const Interview = ({ params }) => {
                 .from(MockInterview)
                 .where(eq(MockInterview.mockId, params.interviewId));
 
+            console.log("Interview details:", result);
 
             setInterviewDetails(result);
             setLoading(false); // Interview details are loaded
@@ -149,4 +150,7 @@ const Interview = ({ params }) => {
 };
 
 export default Interview;
+
+
+
 

@@ -19,6 +19,9 @@ import { useUser } from '@clerk/nextjs'
 import moment from 'moment'
 import { useRouter } from 'next/navigation'
 
+
+
+
 const AddNewInterview = () => {
     const router = useRouter()
     const { user } = useUser()
@@ -37,12 +40,22 @@ const AddNewInterview = () => {
         e.preventDefault()
         try {
             setLoading(true)
-            const InputPrompt = `Job Position: ${jobRole}, Job Description: ${jobDescription}, Experience: ${experience} , 
-            depending on this information give me ${process.env.numberOfQuestions} interview 
-            question with answer in JSON format.give  Question and Answered as fields in JSON.`
+            const InputPrompt = `Job Position: ${jobRole}, Job Description: ${jobDescription}, Experience: ${experience}. 
+Please provide only an array of interview questions and answers in JSON format. 
+Ensure that the response contains no additional information, explanations, or comments. 
+Format the output strictly as follows:
+[
+    {
+        "Question": "Your question here",
+        "Answer": "Your answer here"
+    },
+    ...
+]`;
 
 
             const result = await chatSession.sendMessage(InputPrompt)
+
+
             const mockJsonResponse = (result.response.text()).replace('```json', '').replace('```', '').replace("**Remember:** These are just example questions and answers. Be prepared to discuss your own experiences, projects, and learning goals in detail. Adapt the answers to reflect your individual skills and personality.", "")
             setJsonResp(mockJsonResponse)
 
