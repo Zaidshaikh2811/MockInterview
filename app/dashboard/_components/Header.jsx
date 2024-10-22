@@ -3,6 +3,7 @@
 import { UserButton } from '@clerk/nextjs';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link'; // Import the Link component
 import React from 'react';
 
 const Header = () => {
@@ -21,16 +22,16 @@ const Header = () => {
             />
             <ul className='flex gap-6'>
                 <li className={`cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 ${isActive('/dashboard')}`}>
-                    DashBoard
+                    <Link href="/dashboard">DashBoard</Link> {/* Added Link */}
                 </li>
                 <li className={`cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 ${isActive('/questions')}`}>
-                    Questions
+                    <Link href="/questions">Questions</Link> {/* Added Link */}
                 </li>
                 <li className={`cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 ${isActive('/upgrade')}`}>
-                    Upgrade
+                    <Link href="/upgrade">Upgrade</Link> {/* Added Link */}
                 </li>
                 <li className={`cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 ${isActive('/how-it-works')}`}>
-                    How It Works
+                    <Link href="/how-it-works">How It Works</Link> {/* Added Link */}
                 </li>
             </ul>
 
