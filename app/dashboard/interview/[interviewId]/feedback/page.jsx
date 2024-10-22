@@ -12,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 
+
 const Feedback = ({ params }) => {
     const router = useRouter()
     const [feedbackList, setFeedbackList] = useState([]);
@@ -79,7 +80,8 @@ const Feedback = ({ params }) => {
                     </Collapsible>
                 ))}
             </div>
-            <Button className='mt-4' variant='outline' onCLick={() => router.push("/")}>Go Home</Button>
+            <Button className='mt-4' variant='outline' onClick={() => router.push("/")}>Go Home</Button>
+
         </div>
     );
 };
