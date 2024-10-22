@@ -1,4 +1,3 @@
-Here's how you can structure the content of your GitHub README based on the project details you've shared:
 
 ---
 
@@ -130,10 +129,5 @@ Contributions are welcome! If you'd like to contribute to this project, please:
 
 ---
 
-## **License**
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
----
-
-Feel free to tweak any section or ask for help with customizing the README!
