@@ -74,6 +74,7 @@ const RecordAnswerSection = ({ interviewData, questions, activeQuestion }) => {
                 const result = await chatSession.sendMessage(feedbackPrompt);
                 const responseText = result.response.text().replace('```json', '').replace('```', '');
                 const mockJsonResp = JSON.parse(responseText);
+                console.log(mockJsonResp);
 
                 // Insert answer and feedback into the database
                 const resp = await db.insert(UserAnswer).values({
