@@ -72,6 +72,9 @@ const Header = () => {
                 >
                     <Link href="/how-it-works">How It Works</Link>
                 </li>
+                <div className="block md:hidden p-4 md:p-0 ">
+                    <UserButton />
+                </div>
             </ul>
 
             {/* User button always visible */}

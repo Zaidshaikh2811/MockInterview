@@ -26,7 +26,7 @@ const StartInterview = ({ params }) => {
                 .from(MockInterview)
                 .where(eq(MockInterview.mockId, params.interviewId));
 
-            console.log("Interview details:", result);
+
 
             if (result.length > 0) {
                 const jsonMockRes = JSON.parse(result[0].jsonMockResp.trim());

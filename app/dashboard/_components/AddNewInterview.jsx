@@ -32,17 +32,42 @@ const AddNewInterview = () => {
     const [experience, setExperience] = useState("")
     const [loading, setLoading] = useState(false)
     const [jsonResp, setJsonResp] = useState([])
+    const [interviewMode, setInterviewMode] = useState("Dynamic")
+    const [errorMsg, setErrorMsg] = useState("")
 
+
+    const dynamicQuestionGenerate = async (e) => {
+        e.preventDefault();
+        try {
+            console.log("DynamicQuestionGenerate function called")
+
+            router.push(`/dashboard/dynamic?jobRole=${encodeURIComponent(jobRole)}&jobDescription=${encodeURIComponent(jobDescription)}&experience=${encodeURIComponent(experience)}`)
+        } catch (err) {
+
+        }
+    }
 
 
     const onSubmitForm = async (e) => {
 
         e.preventDefault()
+        setErrorMsg("")
+        if (!jobRole || !jobDescription || !experience) {
+            setErrorMsg("Please fill out all fields.")
+            return
+        }
+
+        if (interviewMode === "Dynamic") {
+            router.push(`/dashboard/dynamic?jobRole=${encodeURIComponent(jobRole)}&jobDescription=${encodeURIComponent(jobDescription)}&experience=${encodeURIComponent(experience)}`)
+            return
+        }
+
         try {
             setLoading(true)
-            const InputPrompt = `Job Position: ${jobRole}, Job Description: ${jobDescription}, Experience: ${experience}. 
-Please provide only an array of interview questions and answers in JSON format. 
-Ensure that the response contains no additional information, explanations, or comments. 
+
+            const InputPrompt = `Job Position: ${jobRole}, Job Description: ${jobDescription}, Experience: ${experience}.
+Please provide only an array of interview questions and answers in JSON format.
+Ensure that the response contains no additional information, explanations, or comments.
 Format the output strictly as follows:
 [
     {
@@ -52,38 +77,33 @@ Format the output strictly as follows:
     ...
 ]`;
 
-
             const result = await chatSession.sendMessage(InputPrompt)
+            const rawText = result.response.text()
+                .replace('```json', '')
+                .replace('```', '')
+                .replace(/(\*\*.*?\*\*)/g, '') // Remove markdown bold text
+                .trim()
 
-
-            const mockJsonResponse = (result.response.text()).replace('```json', '').replace('```', '').replace("**Remember:** These are just example questions and answers. Be prepared to discuss your own experiences, projects, and learning goals in detail. Adapt the answers to reflect your individual skills and personality.", "")
-            setJsonResp(mockJsonResponse)
-
-            if (mockJsonResponse) {
-
-                const resp = await db.insert(MockInterview).values({
-                    mockId: uuidv4(),
-                    jsonMockResp: mockJsonResponse,
-                    jobPosition: jobRole,
-                    jobDesc: jobDescription,
-                    jobExperience: experience,
-                    createdAt: moment().format('DD-MM-YYYY'),
-                    createdBy: user?.primaryEmailAddress?.emailAddress
-
-                }).returning({ mockId: MockInterview.mockId })
-                if (resp) {
-
-                    setOpenDialog(false)
-                    router.push(`/dashboard/interview/${resp[0]?.mockId}`)
-                }
-
-            } else {
-                console.log("No response")
+            if (!rawText.startsWith('[')) {
+                throw new Error("Unexpected response format from AI.")
             }
+
+            const resp = await db.insert(MockInterview).values({
+                mockId: uuidv4(),
+                jsonMockResp: rawText,
+                jobPosition: jobRole,
+                jobDesc: jobDescription,
+                jobExperience: experience,
+                createdAt: moment().format('DD-MM-YYYY'),
+                createdBy: user?.primaryEmailAddress?.emailAddress
+            }).returning({ mockId: MockInterview.mockId })
+
+            setOpenDialog(false)
+            router.push(`/dashboard/interview/${resp[0]?.mockId}`)
         } catch (error) {
-            console.log(error)
-        }
-        finally {
+            console.error(error)
+            setErrorMsg("An error occurred while generating the interview. Please try again.")
+        } finally {
             setJobRole("")
             setJobDescription("")
             setExperience("")
@@ -110,7 +130,10 @@ Format the output strictly as follows:
                                 </p>
 
 
-                                <form onSubmit={onSubmitForm}>
+                                <form
+                                    // onSubmit={onSubmitForm}
+                                    onSubmit={onSubmitForm}
+                                >
                                     <div className='space-y-5'>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1">Job Role / Position</label>
@@ -144,6 +167,32 @@ Format the output strictly as follows:
                                                 className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                             />
                                         </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">Interview Mode</label>
+                                            <div className="flex items-center gap-6">
+                                                <label className="flex items-center gap-2">
+                                                    <input
+                                                        type="radio"
+                                                        value="Static"
+                                                        checked={interviewMode === "Static"}
+                                                        onChange={() => setInterviewMode("Static")}
+                                                        className="form-radio text-primary focus:ring-primary"
+                                                    />
+                                                    Static
+                                                </label>
+                                                <label className="flex items-center gap-2">
+                                                    <input
+                                                        type="radio"
+                                                        value="Dynamic"
+                                                        checked={interviewMode === "Dynamic"}
+                                                        onChange={() => setInterviewMode("Dynamic")}
+                                                        className="form-radio text-primary focus:ring-primary"
+                                                    />
+                                                    Dynamic
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
 
                                     </div>
                                     <div className='flex justify-end gap-4 mt-10'>
