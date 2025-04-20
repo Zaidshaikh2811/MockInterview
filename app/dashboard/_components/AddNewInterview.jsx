@@ -95,7 +95,8 @@ Format the output strictly as follows:
                 jobDesc: jobDescription,
                 jobExperience: experience,
                 createdAt: moment().format('DD-MM-YYYY'),
-                createdBy: user?.primaryEmailAddress?.emailAddress
+                createdBy: user?.primaryEmailAddress?.emailAddress,
+                type: interviewMode
             }).returning({ mockId: MockInterview.mockId })
 
             setOpenDialog(false)

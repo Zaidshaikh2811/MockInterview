@@ -54,7 +54,8 @@ const DynamicInterview = () => {
                 jobDesc: jobDescription,
                 jobExperience: experience,
                 createdAt: moment().format('DD-MM-YYYY'),
-                createdBy: user?.primaryEmailAddress?.emailAddress
+                createdBy: user?.primaryEmailAddress?.emailAddress,
+                type: "Dynamic",
             }).returning({
                 mockId: MockInterview.mockId
             })
@@ -203,7 +204,7 @@ const DynamicInterview = () => {
 
     const handleEndInterview = () => {
         toast.success("Interview ended.")
-        router.push(`/interview/${mockId}/feedback`) // or replace with any dashboard or summary page
+        router.push(`/dashboard/interview/${mockId}/feedback`)
     }
 
     return (
