@@ -65,6 +65,7 @@ const DynamicInterview = () => {
             }).returning({
                 mockId: MockInterview.mockId
             })
+            console.log("Mock interview session created:", result);
 
             if (result.length > 0) {
                 setMockId(result[0].mockId)

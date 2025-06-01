@@ -128,7 +128,7 @@ Format the output strictly as follows:
 
             {/* Enhanced Dialog */}
             <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-                <DialogContent className="max-w-3xl p-0 bg-white rounded-2xl shadow-2xl border-0 overflow-hidden">
+                <DialogContent className="w-[90%] h-[90vh] overflow-y-scroll max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl p-0 bg-white rounded-2xl shadow-2xl border-0 ">
                     {/* Header with gradient */}
                     <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white">
                         <DialogHeader>
