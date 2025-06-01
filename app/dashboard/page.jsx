@@ -1,9 +1,39 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect, useState } from 'react'
 import AddNewInterview from './_components/AddNewInterview'
 import InterviewList from './_components/InterviewList'
 import { Plus, TrendingUp, Users, Target } from 'lucide-react'
+import { useUser } from '@clerk/nextjs'
+import { getInterviewStatistics } from '@/utils/statistics'
 
 const Dashboard = () => {
+    const { user, isLoaded, isSignedIn } = useUser();
+    const [stats, setStats] = useState({
+        successRate: 0,
+        completedInterviews: 0,
+        averageScore: 0
+    });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadStatistics() {
+            if (isLoaded && isSignedIn) {
+                try {
+                    const userEmail = user?.primaryEmailAddress?.emailAddress;
+                    const statistics = await getInterviewStatistics(userEmail);
+                    setStats(statistics);
+                } catch (error) {
+                    console.error('Error loading statistics:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        }
+
+        loadStatistics();
+    }, [isLoaded, isSignedIn, user]);
+
     return (
         <div className='min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50'>
             {/* Header Section */}
@@ -33,7 +63,7 @@ const Dashboard = () => {
                                 </div>
                                 <div>
                                     <p className='text-sm font-medium text-gray-600'>Success Rate</p>
-                                    <p className='text-2xl font-bold text-gray-900'>85%</p>
+                                    <p className='text-2xl font-bold text-gray-900'>{loading ? '...' : `${stats.successRate}%`}</p>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +75,7 @@ const Dashboard = () => {
                                 </div>
                                 <div>
                                     <p className='text-sm font-medium text-gray-600'>Interviews Completed</p>
-                                    <p className='text-2xl font-bold text-gray-900'>12</p>
+                                    <p className='text-2xl font-bold text-gray-900'>{loading ? '...' : stats.completedInterviews}</p>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +87,7 @@ const Dashboard = () => {
                                 </div>
                                 <div>
                                     <p className='text-sm font-medium text-gray-600'>Avg. Score</p>
-                                    <p className='text-2xl font-bold text-gray-900'>8.2/10</p>
+                                    <p className='text-2xl font-bold text-gray-900'>{loading ? '...' : `${stats.averageScore}/10`}</p>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +129,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* Interview List Section */}
-                    <div className='bg-white/70 backdrop-blur-sm border border-white/50 rounded-xl p-6 shadow-sm'>
+                    <div>
                         <InterviewList />
                     </div>
                 </div>
