@@ -3,6 +3,8 @@
 
 # **Gemini AI - Voice-Based Job Interview Preparation**
 
+[![Live Demo](https://mock-interview-five.vercel.app/)
+
 Gemini AI is an AI-powered interview preparation tool that helps users practice answering job-specific questions using voice input. The app provides users with role-specific interview questions, evaluates their responses, and offers feedback for improvement. Future enhancements will include text-based answers and more in-depth analysis of responses.
 
 ---
