@@ -1,166 +1,140 @@
-<div align="center">
-  <h1>🎙️ Gemini AI — Voice-Based Interview Prep Tool</h1>
+<p align="center">
+  <h1 align="center"> Gemini AI — Mock Interview Platform</h1>
+</p>
 
-  <p>
-    <strong>An interactive AI-powered mock interview platform to practice job interviews using voice responses.</strong>
-  </p>
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/Node.js-18.x-43853D?style=for-the-badge&logo=node.js&logoColor=white"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/TypeScript-Full%20Stack-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Next.js-Frontend-000000?style=for-the-badge&logo=next.js&logoColor=white"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/PostgreSQL-Database-316192?style=for-the-badge&logo=postgresql&logoColor=white"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/AI-Gemini-orange?style=for-the-badge"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge"/></a>
+</p>
 
-  <a href="https://mock-interview-five.vercel.app">
-    <img src="https://img.shields.io/badge/Live%20Demo-Visit-blue?logo=vercel" alt="Live Demo">
-  </a>
-  <a href="https://github.com/Zaidshaikh2811/MockInterview/stargazers">
-    <img src="https://img.shields.io/github/stars/Zaidshaikh2811/MockInterview?style=social" alt="GitHub Stars">
-  </a>
-  <a href="https://github.com/Zaidshaikh2811/MockInterview/issues">
-    <img src="https://img.shields.io/github/issues/Zaidshaikh2811/MockInterview" alt="Issues">
-  </a>
-</div>
-
----
-
-## 📌 Table of Contents
-
-- 🚀 **Project Overview**
-- 🛠️ **Tech Stack**
-- ✨ **Key Features**
-- 🧠 **How It Works**
-- 📥 **Getting Started**
-- 📁 **Usage**
-- 🔮 **Future Scope**
-- 🤝 **Contributing**
-- 📄 **License**
+<p align="center">
+  An AI-powered voice-based mock interview platform to practice real interview questions,  
+  receive instant feedback, and improve confidence using modern web technologies.
+</p>
 
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 
-**Gemini AI** is an intelligent interview preparation web application. It helps users practice job interviews by generating role-specific questions and evaluating responses via voice input using cutting-edge AI technologies. :contentReference[oaicite:0]{index=0}
+**Gemini AI – Mock Interview** is a full-stack web application designed to help developers and job seekers  
+practice interviews in a **realistic, voice-first environment**.
 
----
-
-## 🛠️ Tech Stack
-
-| Technology | Purpose |
-|------------|---------|
-| ![Next.js](https://img.shields.io/badge/Next.js-000?logo=next.js&logoColor=white) | Framework |
-| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwindcss&logoColor=white) | UI Styling |
-| ![Clerk](https://img.shields.io/badge/Clerk-000?logo=clerk) | Authentication |
-| ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white) | Database |
-| ![Drizzle ORM](https://img.shields.io/badge/Drizzle-F57F17?logo=drizzle) | ORM |
-| ![Gemini AI](https://img.shields.io/badge/Gemini_AI-FF8C00) | AI & Voice Processing |
+The platform generates **role-specific interview questions**, accepts **spoken answers**,  
+and provides **AI-powered feedback** to help users improve their performance.
 
 ---
 
-## ✨ Key Features
+##  Tech Stack
 
-✔️ Role-based interview question generation  
-✔️ Voice-first interaction for natural practice  
-✔️ Real-time evaluation with feedback  
-✔️ Interview history review  
-✔️ Easy account setup and secure login :contentReference[oaicite:1]{index=1}
-
----
-
-## 🧠 How It Works
-
-1. Users **sign in** securely using Clerk.  
-2. Choose your **job role** to get tailored interview questions.  
-3. Answer via **voice — naturally and fluently**.  
-4. Get **AI-powered feedback** on your answers.  
-5. Review and improve your performance over time. :contentReference[oaicite:2]{index=2}
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="55" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="55" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="55" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="55" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="55" />
+</p>
 
 ---
 
-## 📥 Getting Started
+##  Key Features
 
-### 🔧 Prerequisites
+-  Role-based interview question generation  
+-  Voice-based answers for realistic interview practice  
+-  AI-powered evaluation & feedback  
+-  Secure authentication using Clerk  
+-  Interview history tracking  
+-  Fast and responsive UI with Next.js  
 
-Make sure you have:
+---
 
-- Node.js (v14+)
-- npm or yarn
-- PostgreSQL Database
+##  How It Works
 
-### 🛠️ Installation Steps
+1. Sign in securely  
+2. Select a job role  
+3. Answer interview questions using voice  
+4. Get instant AI feedback  
+5. Review past interview sessions and improve
+
+---
+
+##  Getting Started
+
+### Prerequisites
+
+- Node.js (v18+)
+- PostgreSQL
+- npm / yarn
+
+### Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/Zaidshaikh2811/MockInterview.git
-
-# Navigate into the directory
 cd MockInterview
-
-# Install dependencies
 npm install
 ````
 
-### 📄 Environment Setup
+### Environment Variables
 
-Create a `.env.local` file in the root and add your:
+Create a `.env.local` file:
 
-```bash
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
-CLERK_SECRET_KEY=your_clerk_secret
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
+CLERK_SECRET_KEY=your_secret
 DATABASE_URL=your_postgres_url
-GEMINI_API_KEY=your_gemini_ai_key
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
-### ▶️ Running Locally
+### Run Locally
 
 ```bash
 npm run dev
 ```
 
-Visit: `http://localhost:3000`
+App runs at: `http://localhost:3000`
 
 ---
 
-## 📁 Usage
+##  Future Enhancements
 
-After starting the app:
-
-1. **Sign In**
-2. Choose a **job role**
-3. Speak your answers
-4. Receive instant **AI feedback**
-5. Track improvements through history
+*  Performance analytics dashboard
+*  Text-based interview mode
+*  Interview report export
+*  Mobile-friendly experience
+*  More interview categories
 
 ---
 
-## 🔮 Future Scope
+##  Contributing
 
-🎯 Add text-based input alongside voice
-🎯 Dashboard with performance analytics
-🎯 More job roles & categories
-🎯 Export interview performance reports
-🎯 Mobile app support
+Contributions are welcome!
 
----
+```bash
+git checkout -b feature/your-feature
+git commit -m "Add your feature"
+git push origin feature/your-feature
+```
 
-## 🤝 Contributing
-
-Contributions are welcome! 🙌
-
-1. **Fork** the repo
-2. Create a new branch
-
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
-3. Commit your changes
-4. Push and open a **Pull Request**
+Open a Pull Request 
 
 ---
 
-## 📄 License
+##  License
 
-This project is licensed under the **MIT License**.
+Licensed under the **MIT License**.
 
 ---
 
 <p align="center">
-Made with ❤️ by Zaid Shaikh  
+  Made with ❤️ by <strong>Zaid Shaikh</strong>
 </p>
 ```
-
 ---
+
