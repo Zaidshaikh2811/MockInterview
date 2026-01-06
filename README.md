@@ -1,6 +1,3 @@
----
-
-````markdown
 <div align="center">
   <h1>🎙️ Gemini AI — Voice-Based Interview Prep Tool</h1>
 
