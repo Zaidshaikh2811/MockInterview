@@ -164,5 +164,3 @@ Made with ❤️ by Zaid Shaikh
 ```
 
 ---
-
-If you want, I can also provide **SVG icons**, **GitHub social cards**, or **automated badges** (CI/CD, code coverage) to boost credibility 👍.
