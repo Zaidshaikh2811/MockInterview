@@ -4,10 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { ChevronRight, Zap, Target, BarChart3, Star, Users, Award, ArrowRight } from 'lucide-react';
 
 
-export const metadata = {
-  title: 'AI Interview Pro - Ace Your Interviews with AI-Powered Prep',
-  description: 'Prepare for your interviews with AI Interview Pro. Get real-time feedback, practice industry-specific questions, and boost your confidence with our AI-driven platform.',
-};
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);

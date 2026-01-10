@@ -18,10 +18,6 @@ import { useUser } from '@clerk/nextjs'
 import { v4 as uuidv4 } from 'uuid'
 import moment from 'moment'
 
-export const metadata = {
-    title: 'Dynamic Interview - AI Interview Pro',
-    description: 'Engage in a dynamic AI-powered mock interview tailored to your job role and experience.',
-};
 
 const DynamicInterview = () => {
     const { user } = useUser()

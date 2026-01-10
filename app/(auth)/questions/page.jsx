@@ -2,10 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
-export const metadata = {
-    title: 'Questions - AI Interview Pro',
-    description: 'Have questions about AI Interview Pro? Reach out to us through our question submission form for any inquiries or support.',
-};
+
 
 const Questions = () => {
     const [question, setQuestion] = useState('');

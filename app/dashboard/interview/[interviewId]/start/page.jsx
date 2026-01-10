@@ -10,10 +10,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Square, Clock, User, Briefcase, AlertTriangle } from 'lucide-react';
 
-export const metadata = {
-    title: 'Start Interview - AI Interview Pro',
-    description: 'Begin your AI-powered mock interview session and practice answering questions with real-time feedback.',
-};
+
 
 const StartInterview = ({ params }) => {
     const [loading, setLoading] = useState(true);

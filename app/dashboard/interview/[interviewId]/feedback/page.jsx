@@ -13,10 +13,6 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { ChevronDown, ChevronUp, Trophy, Home, Star } from 'lucide-react';
 
-export const metadata = {
-    title: 'Interview Feedback - AI Interview Pro',
-    description: 'Review your AI-powered mock interview feedback with detailed insights and ratings to help you improve.',
-};
 
 const Feedback = ({ params }) => {
     const router = useRouter()

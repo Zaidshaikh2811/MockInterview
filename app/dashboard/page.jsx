@@ -7,10 +7,7 @@ import { Plus, TrendingUp, Users, Target } from 'lucide-react'
 import { useUser } from '@clerk/nextjs'
 import { getInterviewStatistics } from '@/utils/statistics'
 
-export const metadata = {
-    title: 'Dashboard - AI Interview Pro',
-    description: 'Your personalized dashboard to manage AI-powered mock interviews and track your progress.',
-};
+
 
 const Dashboard = () => {
     const { user, isLoaded, isSignedIn } = useUser();
