@@ -1,5 +1,10 @@
 import React from 'react';
 
+export const metadata = {
+    title: 'How It Works - AI Interview Pro',
+    description: 'Learn how AI Interview Pro leverages the Gemini API to generate interview questions and provide instant feedback.',
+};
+
 const HowItWorks = () => {
     return (
         <div className="p-6 md:p-10 bg-[#4845D2] text-white">

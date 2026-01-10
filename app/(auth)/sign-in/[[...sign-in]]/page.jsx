@@ -1,5 +1,10 @@
 import { SignIn } from '@clerk/nextjs'
 
+export const metadata = {
+    title: 'Sign In - AI Interview Pro',
+    description: 'Sign in to your AI Interview Pro account and access AI-powered mock interviews, real-time feedback, and personalized interview preparation tools.',
+};
+
 export default function Page() {
     return (
 
