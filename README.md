@@ -1,4 +1,3 @@
-
 <p align="center">
   <h1 align="center"> Gemini AI — Mock Interview Platform</h1>
 </p>
